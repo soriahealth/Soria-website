@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soria Health — Your Family's Health, All in One Place</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#4DA896;--teal-light:#6BCFB8;--teal-dark:#3a8a7a;--cream:#FAF8F5;--warm:#F5F0E8;--dark:#1a2332;--mid:#4a5568;--soft:#8a9bb0;--white:#ffffff;--accent:#E8A87C}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,245,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(77,168,150,0.12)}
+.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--teal);letter-spacing:-0.3px}
+.logo span{color:var(--dark)}
+.nav-cta{background:var(--teal);color:white;padding:10px 24px;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;transition:background 0.2s,transform 0.15s}
+.nav-cta:hover{background:var(--teal-dark);transform:translateY(-1px)}
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(107,207,184,0.13) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(232,168,124,0.08) 0%,transparent 50%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(77,168,150,0.1);border:1px solid rgba(77,168,150,0.25);color:var(--teal);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:28px}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--teal);border-radius:50%;display:inline-block}
+h1{font-family:'Playfair Display',serif;font-size:clamp(40px,5vw,64px);line-height:1.1;font-weight:700;color:var(--dark);margin-bottom:24px;letter-spacing:-1px}
+h1 em{font-style:italic;color:var(--teal)}
+.hero-sub{font-size:18px;line-height:1.7;color:var(--mid);font-weight:300;margin-bottom:40px;max-width:480px}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-primary{background:var(--teal);color:white;padding:16px 32px;border-radius:100px;font-size:16px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(77,168,150,0.3)}
+.btn-ghost{color:var(--mid);font-size:15px;font-weight:400;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s}
+.btn-ghost:hover{color:var(--teal)}
+.hero-trust{margin-top:48px;display:flex;align-items:center;gap:16px;font-size:13px;color:var(--soft)}
+.hero-trust strong{color:var(--mid)}
+.trust-avatars{display:flex}
+.trust-avatars span{width:32px;height:32px;border-radius:50%;border:2px solid var(--cream);background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:11px;color:white;font-weight:500;margin-left:-8px}
+.trust-avatars span:first-child{margin-left:0}
+.trust-avatars span:nth-child(2){background:#a8d8c8}
+.trust-avatars span:nth-child(3){background:#c8e8e0}
+.trust-avatars span:nth-child(4){background:var(--accent)}
+.phone-wrap{position:relative;display:flex;justify-content:center;align-items:center}
+.phone{width:280px;background:var(--dark);border-radius:44px;padding:12px;box-shadow:0 40px 80px rgba(26,35,50,0.25),0 0 0 1px rgba(255,255,255,0.08);position:relative}
+.phone-inner{background:var(--cream);border-radius:34px;overflow:hidden;height:560px;position:relative}
+.phone-notch{width:100px;height:28px;background:var(--dark);border-radius:0 0 18px 18px;margin:0 auto;position:relative;z-index:2}
+.phone-screen{padding:16px}
+.app-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.app-greeting{font-size:13px;color:var(--soft);font-weight:300}
+.app-name{font-size:18px;font-weight:600;color:var(--dark);font-family:'Playfair Display',serif}
+.app-avatar{width:36px;height:36px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:white;font-weight:600}
+.health-card{background:linear-gradient(135deg,var(--teal),var(--teal-dark));border-radius:20px;padding:20px;margin-bottom:12px;color:white}
+.health-card-label{font-size:11px;opacity:0.8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.health-card-title{font-size:16px;font-weight:600;margin-bottom:12px}
+.health-card-members{display:flex;gap:8px}
+.member-chip{background:rgba(255,255,255,0.2);border-radius:100px;padding:4px 10px;font-size:11px;font-weight:500}
+.record-list{display:flex;flex-direction:column;gap:8px}
+.record-item{background:white;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 8px rgba(26,35,50,0.06)}
+.record-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.record-icon.med{background:#FFF3E0}
+.record-icon.lab{background:#E8F5E9}
+.record-icon.vax{background:#E3F2FD}
+.record-meta{flex:1}
+.record-title{font-size:12px;font-weight:600;color:var(--dark)}
+.record-sub{font-size:11px;color:var(--soft)}
+.record-badge{font-size:10px;padding:3px 8px;border-radius:100px;font-weight:500}
+.record-badge.active{background:#E8F5E9;color:#2E7D32}
+.record-badge.private{background:#FFF3E0;color:#E65100}
+.phone-float{position:absolute;right:-40px;top:100px;background:white;border-radius:20px;padding:14px 18px;box-shadow:0 12px 40px rgba(26,35,50,0.15);font-size:12px;white-space:nowrap;animation:float 3s ease-in-out infinite}
+.phone-float-icon{font-size:20px;margin-bottom:4px}
+.phone-float-text{font-weight:600;color:var(--dark);font-size:12px}
+.phone-float-sub{color:var(--soft);font-size:11px}
+.phone-float2{position:absolute;left:-50px;bottom:140px;background:white;border-radius:16px;padding:12px 16px;box-shadow:0 12px 40px rgba(26,35,50,0.15);font-size:12px;white-space:nowrap;animation:float 3s ease-in-out infinite 1.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.section{padding:100px 48px;max-width:1200px;margin:0 auto}
+.section-eyebrow{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-bottom:16px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);font-weight:700;color:var(--dark);line-height:1.15;letter-spacing:-0.5px;margin-bottom:20px}
+.section-title em{font-style:italic;color:var(--teal)}
+.section-sub{font-size:17px;line-height:1.7;color:var(--mid);font-weight:300;max-width:560px;margin-bottom:60px}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.problem-card{background:var(--warm);border:1px solid rgba(26,35,50,0.07);border-radius:24px;padding:32px;transition:transform 0.2s}
+.problem-card:hover{transform:translateY(-4px)}
+.problem-icon{font-size:32px;margin-bottom:16px}
+.problem-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--dark);margin-bottom:10px}
+.problem-body{font-size:14px;line-height:1.7;color:var(--mid);font-weight:300}
+.how-section{background:var(--dark);padding:100px 48px;position:relative;overflow:hidden}
+.how-section::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(77,168,150,0.15),transparent 70%);pointer-events:none}
+.how-inner{max-width:1200px;margin:0 auto}
+.how-section .section-eyebrow{color:var(--teal-light)}
+.how-section .section-title{color:var(--white)}
+.how-section .section-title em{color:var(--teal-light)}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative}
+.steps-grid::before{content:'';position:absolute;top:32px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(77,168,150,0.4),transparent);pointer-events:none}
+.step{text-align:center;position:relative}
+.step-num{width:64px;height:64px;border-radius:50%;background:rgba(77,168,150,0.15);border:1px solid rgba(77,168,150,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--teal-light);transition:all 0.2s}
+.step:hover .step-num{background:var(--teal);border-color:var(--teal);color:white}
+.step-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--white);margin-bottom:10px}
+.step-body{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.5);font-weight:300}
+.testimonial-section{padding:100px 48px;background:var(--warm)}
+.testimonial-inner{max-width:1200px;margin:0 auto}
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.tcard{background:white;border-radius:24px;padding:32px;border:1px solid rgba(26,35,50,0.07)}
+.tcard-quote{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;line-height:1.6;color:var(--dark);margin-bottom:24px}
+.tcard-quote::before{content:'\201C';font-size:48px;color:var(--teal);line-height:0;vertical-align:-20px;margin-right:4px;font-family:'Playfair Display',serif}
+.tcard-author{display:flex;align-items:center;gap:12px}
+.tcard-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:white}
+.tcard-name{font-size:14px;font-weight:500;color:var(--dark)}
+.tcard-desc{font-size:12px;color:var(--soft)}
+.pricing-section{padding:100px 48px}
+.pricing-inner{max-width:1200px;margin:0 auto}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.pricing-card{border-radius:28px;padding:40px 36px;border:1px solid rgba(26,35,50,0.1);background:white;position:relative;transition:transform 0.2s,box-shadow 0.2s}
+.pricing-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(26,35,50,0.1)}
+.pricing-card.featured{background:var(--dark);border-color:var(--teal);box-shadow:0 20px 60px rgba(26,35,50,0.2)}
+.featured-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:white;padding:6px 20px;border-radius:100px;font-size:12px;font-weight:500;white-space:nowrap}
+.pricing-tier{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-bottom:12px}
+.pricing-card.featured .pricing-tier{color:var(--teal-light)}
+.pricing-price{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--dark);line-height:1;margin-bottom:4px}
+.pricing-card.featured .pricing-price{color:white}
+.pricing-price span{font-size:16px;font-weight:400;color:var(--soft);font-family:'DM Sans',sans-serif}
+.pricing-card.featured .pricing-price span{color:rgba(255,255,255,0.5)}
+.pricing-desc{font-size:14px;color:var(--mid);margin-bottom:28px;line-height:1.5}
+.pricing-card.featured .pricing-desc{color:rgba(255,255,255,0.6)}
+.pricing-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
+.pricing-features li{font-size:14px;color:var(--mid);display:flex;align-items:flex-start;gap:10px;line-height:1.4}
+.pricing-card.featured .pricing-features li{color:rgba(255,255,255,0.75)}
+.pricing-features li::before{content:'✓';color:var(--teal);font-weight:600;flex-shrink:0;margin-top:1px}
+.pricing-card.featured .pricing-features li::before{color:var(--teal-light)}
+.pricing-btn{width:100%;padding:14px;border-radius:100px;font-size:15px;font-weight:500;border:1.5px solid var(--teal);color:var(--teal);background:transparent;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.pricing-btn:hover{background:var(--teal);color:white}
+.pricing-card.featured .pricing-btn{background:var(--teal);color:white;border-color:var(--teal)}
+.pricing-card.featured .pricing-btn:hover{background:var(--teal-dark)}
+.waitlist-section{background:var(--dark);padding:100px 48px;position:relative;overflow:hidden}
+.waitlist-section::after{content:'';position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(circle,rgba(77,168,150,0.2),transparent 60%);pointer-events:none}
+.waitlist-inner{max-width:640px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.waitlist-section .section-title{color:white;text-align:center}
+.waitlist-section .section-sub{color:rgba(255,255,255,0.6);text-align:center;margin-left:auto;margin-right:auto}
+.waitlist-form{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;justify-content:center}
+.waitlist-input{flex:1;min-width:260px;padding:16px 24px;border-radius:100px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.07);color:white;font-size:16px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.waitlist-input::placeholder{color:rgba(255,255,255,0.35)}
+.waitlist-input:focus{border-color:var(--teal)}
+.waitlist-submit{background:var(--teal);color:white;padding:16px 32px;border-radius:100px;font-size:16px;font-weight:500;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap}
+.waitlist-submit:hover{background:var(--teal-dark);transform:translateY(-2px)}
+.waitlist-fine{font-size:13px;color:rgba(255,255,255,0.35);margin-top:16px}
+.waitlist-count{display:inline-flex;align-items:center;gap:10px;background:rgba(77,168,150,0.15);border:1px solid rgba(77,168,150,0.25);border-radius:100px;padding:8px 20px;font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:32px}
+.waitlist-count strong{color:var(--teal-light)}
+.success-msg{display:none;text-align:center;color:var(--teal-light);font-size:18px;font-family:'Playfair Display',serif;font-style:italic;padding:20px}
+footer{padding:40px 48px;border-top:1px solid rgba(26,35,50,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--teal)}
+.footer-links{display:flex;gap:28px}
+.footer-links a{font-size:13px;color:var(--soft);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--teal)}
+.footer-copy{font-size:12px;color:var(--soft)}
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){nav{padding:16px 24px}.hero{padding:100px 24px 60px}.hero-grid{grid-template-columns:1fr;gap:48px}.phone-wrap{display:none}.section{padding:60px 24px}.problem-grid,.steps-grid,.testimonial-grid,.pricing-grid{grid-template-columns:1fr}.how-section,.testimonial-section,.pricing-section,.waitlist-section{padding:60px 24px}footer{padding:32px 24px;flex-direction:column;text-align:center}.footer-links{justify-content:center}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">soria<span> health</span></div>
+  <a href="#waitlist" class="nav-cta">Join the waitlist</a>
+</nav>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Now accepting early access</div>
+      <h1>Your family's health,<br><em>finally</em> in one place</h1>
+      <p class="hero-sub">You remember everyone's allergies, medications, and doctor's appointments. Soria gives you a place to keep it all — and share it with the people who need it.</p>
+      <div class="hero-actions">
+        <a href="#waitlist" class="btn-primary">Join the waitlist →</a>
+        <a href="#how" class="btn-ghost">See how it works ↓</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-avatars"><span>S</span><span>M</span><span>A</span><span>L</span></div>
+        <div><strong>Families</strong> already on the waitlist</div>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-inner">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="app-header">
+              <div><div class="app-greeting">Good morning</div><div class="app-name">Sarah</div></div>
+              <div class="app-avatar">S</div>
+            </div>
+            <div class="health-card">
+              <div class="health-card-label">Your family</div>
+              <div class="health-card-title">4 members connected</div>
+              <div class="health-card-members"><div class="member-chip">Emma, 8</div><div class="member-chip">Tom, 42</div><div class="member-chip">Mom</div></div>
+            </div>
+            <div class="record-list">
+              <div class="record-item"><div class="record-icon med">💊</div><div class="record-meta"><div class="record-title">Emma — Amoxicillin</div><div class="record-sub">250mg · twice daily</div></div><div class="record-badge active">Active</div></div>
+              <div class="record-item"><div class="record-icon lab">🧪</div><div class="record-meta"><div class="record-title">Mom — HbA1c</div><div class="record-sub">Result: 6.1% · Normal</div></div><div class="record-badge active">Done</div></div>
+              <div class="record-item"><div class="record-icon vax">💉</div><div class="record-meta"><div class="record-title">Emma — MMR Vaccine</div><div class="record-sub">Dose 2 of 2 · Complete</div></div><div class="record-badge private">Private</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-float"><div class="phone-float-icon">💬</div><div class="phone-float-text">Ask Me</div><div class="phone-float-sub">"Who takes a blood thinner?"</div></div>
+      <div class="phone-float2"><div class="phone-float-icon">🔒</div><div class="phone-float-text">Private record</div><div class="phone-float-sub">Visible only to you</div></div>
+    </div>
+  </div>
+</section>
+<div style="background:var(--cream)">
+<div class="section fade-up">
+  <div class="section-eyebrow">The problem</div>
+  <h2 class="section-title">You're the family's<br><em>unofficial</em> chief medical officer</h2>
+  <p class="section-sub">You hold it all in your head — and one day, you'll wish it was somewhere else.</p>
+  <div class="problem-grid">
+    <div class="problem-card"><div class="problem-icon">🗂️</div><div class="problem-title">It lives in a dozen places</div><p class="problem-body">A folder here, a photo there, an email thread from 2019. When a doctor asks for your mother's medication list, you scramble.</p></div>
+    <div class="problem-card"><div class="problem-icon">📞</div><div class="problem-title">You're always the one they call</div><p class="problem-body">Your kids, your parents, your partner — when there's a health question, you're the first phone call. Soria helps you be ready.</p></div>
+    <div class="problem-card"><div class="problem-icon">💨</div><div class="problem-title">Family history disappears</div><p class="problem-body">Your grandmother's conditions, your father's surgeries — this information is irreplaceable and right now it's nowhere safe.</p></div>
+  </div>
+</div>
+</div>
+<section class="how-section" id="how">
+  <div class="how-inner fade-up">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title" style="color:white">Set up in minutes.<br><em>Useful</em> for generations.</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.55);margin-bottom:60px">Built for the way real families actually work — some people share everything, some keep things private. Soria handles both.</p>
+    <div class="steps-grid">
+      <div class="step"><div class="step-num">1</div><div class="step-title">Create your profile</div><p class="step-body">Sign up and add your own health records — medications, allergies, conditions, and documents — in minutes.</p></div>
+      <div class="step"><div class="step-num">2</div><div class="step-title">Build your family network</div><p class="step-body">Add your kids, connect with your parents, and manage anyone who can't manage their own records.</p></div>
+      <div class="step"><div class="step-num">3</div><div class="step-title">Control who sees what</div><p class="step-body">Mark any record private — it disappears from everyone, including household managers. Your health, your rules.</p></div>
+      <div class="step"><div class="step-num">4</div><div class="step-title">Ask Me anything</div><p class="step-body">Our AI assistant answers questions across your whole family's records instantly.</p></div>
+    </div>
+  </div>
+</section>
+<section class="testimonial-section">
+  <div class="testimonial-inner fade-up">
+    <div class="section-eyebrow">Early feedback</div>
+    <h2 class="section-title">What families are saying</h2>
+    <div class="testimonial-grid">
+      <div class="tcard"><p class="tcard-quote">I manage health records for my two kids and my mom who has diabetes. The idea that it could all live in one place — and that I could ask it questions — is exactly what I needed.</p><div class="tcard-author"><div class="tcard-avatar" style="background:#4DA896">JM</div><div><div class="tcard-name">Jessica M.</div><div class="tcard-desc">Mom of 2 · Waitlist member</div></div></div></div>
+      <div class="tcard"><p class="tcard-quote">My dad had a health emergency and I couldn't remember his medications. That moment made me realize I needed something like Soria.</p><div class="tcard-author"><div class="tcard-avatar" style="background:#a8d8c8">RK</div><div><div class="tcard-name">Rachel K.</div><div class="tcard-desc">Daughter & caregiver · Beta tester</div></div></div></div>
+      <div class="tcard"><p class="tcard-quote">The generational angle is what got me. My kids will one day want to know about family health history — Soria is how that actually gets preserved.</p><div class="tcard-author"><div class="tcard-avatar" style="background:#c8e8e0">AL</div><div><div class="tcard-name">Amanda L.</div><div class="tcard-desc">Mom & daughter · Early access</div></div></div></div>
+    </div>
+  </div>
+</section>
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner fade-up" style="text-align:center">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="section-title" style="margin-left:auto;margin-right:auto">Free for<br><em>every family.</em></h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;text-align:center">Soria is free. No subscriptions, no credit card, no catch.</p>
+    <div style="max-width:480px;margin:0 auto">
+      <div class="pricing-card featured" style="text-align:left">
+        <div class="pricing-tier">Soria Health</div>
+        <div class="pricing-price">$0<span> / month</span></div>
+        <p class="pricing-desc">Every feature, every family member, completely free</p>
+        <ul class="pricing-features">
+          <li>Your own full health profile</li>
+          <li>Unlimited health records & documents</li>
+          <li>Manage profiles for kids & parents</li>
+          <li>Connect with extended family</li>
+          <li>Ask Me AI assistant</li>
+          <li>Privacy controls on every record</li>
+          <li>Health alerts & medication reminders</li>
+          <li>Legacy profile support</li>
+        </ul>
+        <button class="pricing-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Get early access — it's free</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="waitlist-section" id="waitlist">
+  <div class="waitlist-inner fade-up">
+    <div class="waitlist-count"><strong>Early access</strong> · Be first when we launch</div>
+    <h2 class="section-title" style="font-size:clamp(32px,4vw,52px)">Ready to stop holding<br><em>all of it</em> in your head?</h2>
+    <p class="section-sub" style="margin-bottom:40px">Join the waitlist and get early access when Soria launches. Free to start. No credit card required.</p>
+    <div class="waitlist-form">
+      <input type="email" class="waitlist-input" placeholder="your@email.com" id="emailInput">
+      <button class="waitlist-submit" onclick="handleSignup()">Get early access</button>
+    </div>
+    <div class="success-msg" id="successMsg">You're on the list. We'll be in touch soon. ✦</div>
+    <p class="waitlist-fine">No spam. No credit card. Unsubscribe anytime.</p>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo">soria health</div>
+  <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact</a></div>
+  <div class="footer-copy">© 2026 Soria Health, Inc. All rights reserved.</div>
+</footer>
+<script>
+function handleSignup(){const input=document.getElementById('emailInput');const form=document.querySelector('.waitlist-form');const success=document.getElementById('successMsg');if(!input.value||!input.value.includes('@')){input.style.borderColor='#fc8181';input.focus();return;}form.style.display='none';success.style.display='block';}
+document.getElementById('emailInput').addEventListener('keydown',function(e){if(e.key==='Enter')handleSignup();this.style.borderColor='';});
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');}});},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
