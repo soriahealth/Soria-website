@@ -266,11 +266,36 @@ footer{padding:40px 48px;border-top:1px solid rgba(26,35,50,0.08);display:flex;j
     <div class="waitlist-count"><strong>Early access</strong> · Be first when we launch</div>
     <h2 class="section-title" style="font-size:clamp(32px,4vw,52px)">Ready to stop holding<br><em>all of it</em> in your head?</h2>
     <p class="section-sub" style="margin-bottom:40px">Join the waitlist and get early access when Soria launches. Free to start. No credit card required.</p>
-    <div style="margin:0 auto;width:100%;max-width:560px">
-      <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-      <iframe src="https://subscribe-forms.beehiiv.com/6450bc9c-f394-4309-b64b-3d6bf3b291e5" frameborder="0" scrolling="no" style="width:100%;height:442px;margin:0;border-radius:12px;background-color:transparent;max-width:100%;"></iframe>
-    </div>
+    <form id="signupForm" style="display:flex;flex-direction:column;gap:14px;max-width:480px;margin:0 auto;width:100%">
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <input type="text" id="firstName" placeholder="First name" required style="flex:1;min-width:140px;padding:16px 22px;border-radius:100px;border:2px solid #ffffff;background:#ffffff;color:#1a2332;font-size:16px;font-family:inherit;outline:none">
+        <input type="text" id="lastName" placeholder="Last name" style="flex:1;min-width:140px;padding:16px 22px;border-radius:100px;border:2px solid #ffffff;background:#ffffff;color:#1a2332;font-size:16px;font-family:inherit;outline:none">
+      </div>
+      <input type="email" id="emailAddr" placeholder="your@email.com" required style="width:100%;padding:16px 22px;border-radius:100px;border:2px solid #ffffff;background:#ffffff;color:#1a2332;font-size:16px;font-family:inherit;outline:none">
+      <button type="submit" id="submitBtn" style="width:100%;padding:16px;border-radius:100px;background:#4DA896;color:white;font-size:16px;font-weight:500;border:none;cursor:pointer;font-family:inherit;transition:background 0.2s">Get early access</button>
+    </form>
+    <div id="successMsg" style="display:none;text-align:center;color:#6BCFB8;font-size:18px;font-family:inherit;font-style:italic;padding:20px">You are on the list. We will be in touch soon. ✦</div>
     <p class="waitlist-fine">No spam. No credit card. Unsubscribe anytime.</p>
+    <script>
+    document.getElementById("signupForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      var btn = document.getElementById("submitBtn");
+      btn.textContent = "Joining...";
+      btn.disabled = true;
+      var email = document.getElementById("emailAddr").value;
+      var first = document.getElementById("firstName").value;
+      var last = document.getElementById("lastName").value;
+      try {
+        await fetch("https://soria-health-02d32c.beehiiv.com/subscribe", {
+          method: "POST", mode: "no-cors",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({email: email, first_name: first, last_name: last})
+        });
+      } catch(err) {}
+      document.getElementById("signupForm").style.display = "none";
+      document.getElementById("successMsg").style.display = "block";
+    });
+    </script>
   </div>
 </section>
 <footer>
