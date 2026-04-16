@@ -286,12 +286,18 @@ footer{padding:40px 48px;border-top:1px solid rgba(26,35,50,0.08);display:flex;j
       var first = document.getElementById("firstName").value;
       var last = document.getElementById("lastName").value;
       try {
-        await fetch("https://soria-health-02d32c.beehiiv.com/subscribe", {
-          method: "POST", mode: "no-cors",
+        var res = await fetch("/api/subscribe", {
+          method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({email: email, first_name: first, last_name: last})
         });
-      } catch(err) {}
+        if (!res.ok) throw new Error("Failed");
+      } catch(err) {
+        btn.textContent = "Get early access";
+        btn.disabled = false;
+        alert("Something went wrong. Please try again.");
+        return;
+      }
       document.getElementById("signupForm").style.display = "none";
       document.getElementById("successMsg").style.display = "block";
     });
